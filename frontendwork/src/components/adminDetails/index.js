@@ -36,7 +36,7 @@ const AdminDetails=()=>{
                 body:JSON.stringify({email:adminDetails.email,
                     statusText:updateStatusText})
             }
-            const response=await fetch("http://localhost:5000/updateUserStatus",options);
+            const response=await fetch("https://lms-backend-4-k10h.onrender.com/updateUserStatus",options);
             if(response.ok){
                 Swal.fire({
                         title: 'success!',
@@ -66,7 +66,7 @@ const AdminDetails=()=>{
         ()=>{
             const getdata=async()=>{ 
             setLoading(true);
-            const response=await fetch(`http://localhost:5000/studentDetails/${email}`);
+            const response=await fetch(`https://lms-backend-4-k10h.onrender.com/studentDetails/${email}`);
             const adminInfo=await response.json();
             setAdminDetails(adminInfo);
             }
@@ -86,7 +86,7 @@ const AdminDetails=()=>{
                     <h4>Admin Information</h4>
                 </div>
                 <div className='col-md-4 col-12 imgDiv'>
-                   <img className='bookimage' src={`http://localhost:5000/uploads/persons/${adminDetails.photo}`} alt='Not Available'/>
+                   <img className='bookimage' src={`https://lms-backend-4-k10h.onrender.com/uploads/persons/${adminDetails.photo}`} alt='Not Available'/>
                 </div>
                 <div className='col-12 col-md-8'>
                     <div className='container'>
