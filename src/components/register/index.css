@@ -1,0 +1,43 @@
+.formContainer{
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    border: 2px solid blue;
+    padding: 0 2rem;
+    border-radius: 2%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   font-weight: 500;
+   box-shadow: 2px 2px 2px rgb(193, 193, 241);
+}
+.btn-reg{
+    padding: 0.5rem 1rem;
+    background-color:rgb(76, 176, 79);
+    border: green;
+    color: white;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   font-weight: 500;
+}
+.formContainer h4{
+   color: purple;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   font-weight: 500;
+   margin: 1rem 0;
+   text-decoration: underline;
+}
+.select-field{
+    background-color: transparent;
+}
+.form-field{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+.form-field label{
+    text-align: start;
+    background: transparent;
+}
+.input-field{
+    border: 1px solid rgb(84, 42, 222);
+    background: transparent;
+}

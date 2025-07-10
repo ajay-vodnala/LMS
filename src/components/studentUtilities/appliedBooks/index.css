@@ -1,0 +1,37 @@
+.appliedBookImg{
+    width: 30%;
+}
+.singleBookDiv{
+    border: 2px solid blue;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.appliedImageDiv{
+     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.appliedContentDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+.appliedContentDiv p{
+   margin: 0;
+}
+.appliedButtonDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.appliedBookContent{
+    color:purple;
+    font-weight: 600;
+}

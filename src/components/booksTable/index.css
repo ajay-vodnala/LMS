@@ -1,0 +1,28 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+  box-sizing: border-box;
+  font-style: italic;
+  font-weight: 600;
+}
+
+th{
+  text-align: center;
+  padding: 0.5rem;
+  color: white;
+}
+td{
+  text-align: center;
+  padding: 0.3rem;
+}
+
+.dataRow:nth-child(even) {
+  background-color: rgb(190, 190, 247);
+}
+.statusText{
+  color:red;
+  font-weight: 600;
+}
+.greenText{
+  color: green;
+}
