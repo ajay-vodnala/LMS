@@ -12,6 +12,7 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const app=express();
+const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 app.use('/uploads',express.static('uploads'));
@@ -23,9 +24,8 @@ const initalizeDbServer=async()=>{
             filename:"./libraryserver.db",
             driver:sqlite3.Database
         });
-        app.listen(5000,()=>{
-            console.log("server is running at 5000");
-        })
+        app.listen(port, () => {
+        console.log(`Server started on port ${port}`);
     }
     catch(e){
         console.log(`error:${e.message}`);
