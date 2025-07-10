@@ -28,7 +28,7 @@ const Login=()=> {
     e.preventDefault();
     try {
 
-        const response=await fetch('http://localhost:5000/login',{
+        const response=await fetch('https://lms-backend-4-k10h.onrender.com/login',{
           method:'POST',
           headers:{
             "Content-type":'application/json',
