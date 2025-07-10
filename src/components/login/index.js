@@ -4,7 +4,7 @@ import './index.css';
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
 import Preloader from '../loader';
-
+const serverURL = process.env.REACT_APP_SERVER_URL;
 const Login=()=> {
   const navigate=useNavigate();
   const [email, setEmail] = useState('');
@@ -28,7 +28,7 @@ const Login=()=> {
     e.preventDefault();
     try {
 
-        const response=await fetch('http://localhost:5000/login',{
+        const response=await fetch(`${serverURL}/login`,{
           method:'POST',
           headers:{
             "Content-type":'application/json',

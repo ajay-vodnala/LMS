@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import Preloader from "../loader";
 import '../bookDetails/index.css';
 import { Link } from "react-router-dom";
+const serverURL = process.env.REACT_APP_SERVER_URL;
 
 const Profile=(props)=>{
     const jwtToken=Cookies.get("jwtToken");
@@ -14,7 +15,7 @@ const Profile=(props)=>{
             setLoading(true);
             const getUserDetails=async()=>{
                 try {
-                    const response=await fetch("http://localhost:5000/userDetails",{
+                    const response=await fetch(`${serverURL}/userDetails`,{
                     method:'GET',
                     headers:{
                             "Content-Type":"application/json",
@@ -57,7 +58,7 @@ const Profile=(props)=>{
                     <h4 className="ms-4">Profile</h4>
                 </div>
                 <div className='col-md-4 col-12 mb-4 mb-md-0 imgDiv'>
-                   <img className='bookimage profileImg' src={`http://localhost:5000/uploads/persons/${userDetails.photo}`} alt='Not Available'/>
+                   <img className='bookimage profileImg' src={`${serverURL}/uploads/persons/${userDetails.photo}`} alt='Not Available'/>
                 </div>
                 <div className='col-12 col-md-8'>
                     <div className='container'>

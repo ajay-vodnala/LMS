@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import Preloader from "../../loader";
 import Cookies from "js-cookie";
 import ResultsNotFound from "../../resultsNotFound";
+const serverURL = process.env.REACT_APP_SERVER_URL;
 const ReturnBook=()=>{
     const jwtToken=Cookies.get("jwtToken");
     const [booksList,setBooksList]=useState([]);
@@ -19,7 +20,7 @@ const ReturnBook=()=>{
     const returnBook= async (id)=>{
           setLoading(true);
            try {
-                  const response=await fetch(`http://localhost:5000/updateBookStatus/${id}`,{
+                  const response=await fetch(`${serverURL}/updateBookStatus/${id}`,{
                                               method:"PUT",
                                               headers:{
                                                   "Content-Type":"application/json",
@@ -72,7 +73,7 @@ const ReturnBook=()=>{
                       "Authentication":`Bearer ${jwtToken}`
                     }
                   }
-                  const response=await fetch("http://localhost:5000/studentUtilities/appliedBooks",options);
+                  const response=await fetch(`${serverURL}/studentUtilities/appliedBooks`,options);
                   const appliedBooksData=await response.json();
                   const searchFilterBooks=appliedBooksData.filter((eachItem)=>eachItem.bookId.includes(searchText)||eachItem.title.includes(searchText));
                   setBooksList(searchFilterBooks)

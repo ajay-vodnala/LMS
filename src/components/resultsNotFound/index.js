@@ -1,8 +1,9 @@
 import './index.css';
+const serverURL = process.env.REACT_APP_SERVER_URL;
 const ResultsNotFound=()=>{
     return(
         <div className="noResults">
-            <img src="http://localhost:5000/uploads/9170826.jpg" alt="image not found"/>
+            <img src={`${serverURL}/uploads/9170826.jpg`} alt="image not found"/>
         </div>
     )
 }

@@ -62,6 +62,11 @@ const Contact=()=>{
             </span>
           </div>
         </div>
+        <div>
+          <p className='rights text-center mt-3 mt-md-0'>Designed By <b>Ajay Vodnala</b></p>
+          <p className='copyright ms-md-5 ms-0'><i class="fa-solid fa-copyright"></i> All rights reserved 2025</p>
+        </div>
+        
     </div>
   )
 }

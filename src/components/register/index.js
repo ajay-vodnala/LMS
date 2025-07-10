@@ -4,6 +4,7 @@ import './index.css';
 import Swal from 'sweetalert2';
 import Preloader from '../loader';
 import Cookies from 'js-cookie';
+const serverURL = process.env.REACT_APP_SERVER_URL;
 
 const Register=()=>{
   const navigate=useNavigate();
@@ -64,7 +65,7 @@ const Register=()=>{
                 userData.append('address', form.address);
                 userData.append('photo', form.photo);
             try {
-                        const response=await fetch('http://localhost:5000/register',{
+                        const response=await fetch(`${serverURL}/register`,{
                                     method:"POST",
                                     body:userData
                         });

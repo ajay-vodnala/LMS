@@ -2,6 +2,7 @@ import './index.css';
 import { useState,useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Preloader from '../loader';
+const serverURL = process.env.REACT_APP_SERVER_URL;
 const BookDetails=()=>{
     const [bookDetails,setBookDetails]=useState({
         title:null,
@@ -20,7 +21,7 @@ const BookDetails=()=>{
         ()=>{
             const getdata=async()=>{
             setLoading(true);
-            const response=await fetch(`http://localhost:5000/bookDetails/${bookId}`);
+            const response=await fetch(`${serverURL}/bookDetails/${bookId}`);
             const bookInfo=await response.json();
             setBookDetails(bookInfo);
         }
@@ -40,7 +41,7 @@ const BookDetails=()=>{
                     <h4>Book Information</h4>
                 </div>
                 <div className='col-md-4 col-12  imgDiv'>
-                   <img className='bookimage' src={`http://localhost:5000/uploads/books/${bookDetails.imageUrl}`} alt='Not Available'/>
+                   <img className='bookimage' src={`${serverURL}/uploads/books/${bookDetails.imageUrl}`} alt='Not Available'/>
                 </div>
                 <div className='col-12 col-md-8'>
                     <div className='container'>

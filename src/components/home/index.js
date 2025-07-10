@@ -4,6 +4,7 @@ import BooksTable from '../booksTable';
 import Preloader from '../loader/index';
 import ResultsNotFound from '../resultsNotFound';
 import Swal from 'sweetalert2';
+const serverURL = process.env.REACT_APP_SERVER_URL;
 const tabItems=[
                 {
                     tabId:"all",
@@ -61,7 +62,7 @@ const Home=()=>{
                     setLoading(true);
                     const getBooks=async()=>{
                         try {
-                            const response=await fetch("http://localhost:5000/booksList");
+                            const response=await fetch(`${serverURL}/booksList`);
                             const BooksData=await response.json();
                              if(activeTabId==="all"){
                                     const filteredArray=BooksData.filter((eachItem)=>eachItem.title.includes(searchText)||eachItem.author.includes(searchText)||eachItem.department.includes(searchText)||eachItem.location.includes(searchText)||eachItem.language.includes(searchText));

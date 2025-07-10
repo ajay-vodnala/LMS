@@ -26,7 +26,6 @@ import ReturnBooks from './components/adminUtilities/manageBooks/returnBookAppro
 import AddBook from './components/adminUtilities/manageBooks/addBook';
 import ApproveBooks from './components/adminUtilities/manageBooks/applicationApproval/index';
 import Preloader from './components/loader';
-import InsertData from './components/studentUtilities/returnBook/demo';
 import DeleteUser from './components/adminUtilities/manageBooks/deleteAdmin';
 import Interface from './components/interface';
 import ProtectedRoute from './components/protectedRoute';
@@ -65,7 +64,6 @@ export const App =()=>{
                       <Route exact path="/returnapproval" element={<ReturnBooks/>} />
                       <Route path="/updateBooksList" element={<UpdateBook/>} />
                   </Route> 
-                  <Route exact path="/hjdddjddjd" element={<InsertData/>} />
                   <Route exact path="/profile" element={<Profile />} />
                   <Route exact path="/contact" element={<Contact />} />
                   <Route exact path="/bookDetails/:bookId" element={<BookDetails />} /> 

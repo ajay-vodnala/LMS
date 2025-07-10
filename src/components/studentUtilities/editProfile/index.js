@@ -4,6 +4,7 @@ import '../../register/index.css';
 import Swal from 'sweetalert2';
 import Preloader from '../../loader/index';
 import Cookies from 'js-cookie';
+const serverURL = process.env.REACT_APP_SERVER_URL;
 
 const EditProfile=()=>{
   const jwtToken=Cookies.get("jwtToken");
@@ -39,7 +40,7 @@ const EditProfile=()=>{
                         authentication:`Bearer ${jwtToken}`
                     }
                   }
-                  const response=await fetch("http://localhost:5000/userDetails",options)
+                  const response=await fetch(`${serverURL}/userDetails`,options)
                   const Userdetails= await response.json();
                   const UserInfo=Userdetails[0];
                   setUserInfo({
@@ -78,7 +79,7 @@ const EditProfile=()=>{
                 userData.append('address', UserInfo.address);
                 userData.append('photo', UserInfo.photo);
             try {
-                        const response=await fetch('http://localhost:5000/updateUserDetails',{
+                        const response=await fetch(`${serverURL}/updateUserDetails`,{
                                     method:"PUT",
                                     body:userData
                         });

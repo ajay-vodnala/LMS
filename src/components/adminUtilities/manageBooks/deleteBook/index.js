@@ -4,6 +4,7 @@ import ManageBooksDisplay from '../manageBooksDisplayComp';
 import Swal from 'sweetalert2';
 import ResultsNotFound from '../../../resultsNotFound';
 import '../index.css';
+const serverURL = process.env.REACT_APP_SERVER_URL;
 const DeleteBook=()=>{
   const [booksInfo,setBooksInfo]=useState([]);
   const [count,setCount]=useState(0);
@@ -15,7 +16,7 @@ const DeleteBook=()=>{
     const manageFun= async (id)=>{
        try {
                 setLoading(true);
-                const response =await fetch(`http://localhost:5000/deleteBook/${id}`,{
+                const response =await fetch(`${serverURL}/deleteBook/${id}`,{
                   method:"DELETE"});
                   if (response.ok){
                        Swal.fire({
@@ -49,7 +50,7 @@ const DeleteBook=()=>{
                         setLoading(true);
                         const getBooks=async()=>{
                             try {
-                                const response=await fetch("http://localhost:5000/booksList");
+                                const response=await fetch(`${serverURL}/booksList`);
                                 const BooksData=await response.json();
                                 const availableBooks=BooksData.filter((eachItem)=>eachItem.status==="available");
                                 const filteredDeleteBooks=availableBooks.filter((eachItem)=>eachItem.bookId.includes(searchText)||eachItem.title.includes(searchText));

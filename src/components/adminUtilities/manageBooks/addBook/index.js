@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import 'react-native-get-random-values';
 import Swal from 'sweetalert2';
 import {v4 as uuidv4} from 'uuid';
+const serverURL = process.env.REACT_APP_SERVER_URL;
 const AddBook=()=>{
     const navigate=useNavigate();
 const [bookDetails,setBookDetails]=useState({
@@ -36,7 +37,7 @@ const [bookDetails,setBookDetails]=useState({
             data.append('imageUrl', bookDetails.imageUrl);
             data.append('bookId', bookDetails.bookId);
         try {
-                    const response=await fetch('http://localhost:5000/addBook',{
+                    const response=await fetch(`${serverURL}/addBook`,{
                                 method:"POST",
                                 body:data
                     });

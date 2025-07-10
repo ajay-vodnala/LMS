@@ -1,5 +1,6 @@
 import './index.css';
 import { Link } from 'react-router-dom';
+const serverURL = process.env.REACT_APP_SERVER_URL;
 const DisplayBooks=(props)=>{
     const {bookDetails}=props;
     const{bookId,imageUrl,title,author,department,yearOfPublish,language,location,status}=bookDetails;
@@ -9,7 +10,7 @@ const DisplayBooks=(props)=>{
     }
     return(
         <tr className='dataRow'>
-            <td className='imageDiv'><img src={`http://localhost:5000/uploads/books/${imageUrl}`} className='bookImg' alt='Book Image'></img></td>
+            <td className='imageDiv'><img src={`${serverURL}/uploads/books/${imageUrl}`} className='bookImg' alt='Book Image'></img></td>
             <td>{title}</td>
             <td>{author}</td>
             <td>{department}</td>

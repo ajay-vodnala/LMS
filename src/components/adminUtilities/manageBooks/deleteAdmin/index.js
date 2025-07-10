@@ -5,6 +5,7 @@ import { useState ,useEffect} from 'react';
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
 import ResultsNotFound from '../../../resultsNotFound';
+const serverURL = process.env.REACT_APP_SERVER_URL;
 const DeleteUser=()=>{
     const jwtToken=Cookies.get("jwtToken");
 const [usersInfo,setUsersInfo]=useState([]);
@@ -30,7 +31,7 @@ const activeTab2=(deleteRole==="Students")?"activeFilterTabBtn":null;
     const deleteUser=async(id)=>{
         try {
             setLoading(true);
-            const response =await fetch(`http://localhost:5000/deleteUser/${id}`,{
+            const response =await fetch(`${serverURL}/deleteUser/${id}`,{
                 method:"DELETE"});
                 if (response.ok){
                     Swal.fire({
@@ -67,9 +68,9 @@ const activeTab2=(deleteRole==="Students")?"activeFilterTabBtn":null;
                 let list;
                 const getUsers=async()=>{
                     try {
-                        const response=await fetch('http://localhost:5000/userList');
+                        const response=await fetch(`${serverURL}/userList`);
                         const userList=await response.json();
-                        const emailResponse=await fetch('http://localhost:5000/getEmail',{
+                        const emailResponse=await fetch(`${serverURL}/getEmail`,{
                             mathod:"GET",
                             headers:{
                                 authentication:`Bearer ${jwtToken}`

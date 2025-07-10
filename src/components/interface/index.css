@@ -23,7 +23,7 @@
     background-size: cover;
     background-position: right;
     background-repeat: no-repeat;
-    background-image: url('http://localhost:5000/uploads/8364.jpg');
+    background-image: url('https://lms-backend-4-k10h.onrender.com/uploads/8364.jpg');
     overflow: hidden;
 }
 .interfaceContent{

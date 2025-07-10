@@ -6,6 +6,7 @@ import '../index.css';
 import ReturnComp from './returnComp';
 import Preloader from '../../../loader';
 import ResultsNotFound from '../../../resultsNotFound';
+const serverURL = process.env.REACT_APP_SERVER_URL;
 const ReturnBooks=()=>{
   const jwtToken=Cookies.get("jwtToken");
    const navigate=useNavigate();
@@ -19,7 +20,7 @@ const ReturnBooks=()=>{
     const approveReturnBook= async (id)=>{
       setLoading(true);
        try {
-              const response=await fetch(`http://localhost:5000/updateBookStatus/${id}`,{
+              const response=await fetch(`${serverURL}/updateBookStatus/${id}`,{
                                           method:"PUT",
                                           headers:{
                                               "Content-Type":"application/json",
@@ -65,7 +66,7 @@ const ReturnBooks=()=>{
            const getBooksData=async()=>{
             setLoading(true);
             try {
-               const booksResponse=await fetch('http://localhost:5000/booksList');
+               const booksResponse=await fetch(`${serverURL}/booksList`);
                const booksInformation=await booksResponse.json();
                const filteredBooks=booksInformation.filter((eachItem)=>eachItem.status==="return-pending"&&eachItem.title.includes(searchText));
                setBooksInfo(filteredBooks);

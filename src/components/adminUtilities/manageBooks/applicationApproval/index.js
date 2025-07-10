@@ -6,6 +6,7 @@ import ApprovalComp from './approvalComp';
 import ResultsNotFound from '../../../resultsNotFound';
 import Preloader from '../../../loader';
 import Cookies from 'js-cookie';
+const serverURL = process.env.REACT_APP_SERVER_URL;
 const ApproveBooks=()=>{
   const navigate=useNavigate();
   const jwtToken=Cookies.get("jwtToken");
@@ -19,7 +20,7 @@ const ApproveBooks=()=>{
   const approveBook= async (bookId,appliedBy)=>{
     setLoading(true);
      try {
-            const response=await fetch(`http://localhost:5000/updateBookStatus/${bookId}`,{
+            const response=await fetch(`${serverURL}/updateBookStatus/${bookId}`,{
                                         method:"PUT",
                                         headers:{
                                             "Content-Type":"application/json",
@@ -64,7 +65,7 @@ const ApproveBooks=()=>{
   const rejectBook= async (bookId,appliedBy)=>{
     setLoading(true);
      try {
-            const response=await fetch(`http://localhost:5000/updateBookStatus/${bookId}`,{
+            const response=await fetch(`${serverURL}/updateBookStatus/${bookId}`,{
                                         method:"PUT",
                                         headers:{
                                             "Content-Type":"application/json",
@@ -110,7 +111,7 @@ const ApproveBooks=()=>{
              const getBooksData=async()=>{
               setLoading(true);
               try {
-                 const booksResponse=await fetch('http://localhost:5000/booksList');
+                 const booksResponse=await fetch(`${serverURL}/booksList`);
                  const booksInformation=await booksResponse.json();
                  const filteredBooks=booksInformation.filter((eachItem)=>eachItem.status==="application-pending"&&eachItem.title.includes(searchText));
                  setBooksInfo(filteredBooks);

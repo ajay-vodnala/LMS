@@ -4,6 +4,7 @@ import Preloader from '../../../loader/index';
 import '../../manageBooks/index.css';
 import ResultsNotFound from "../../../resultsNotFound";
 import Swal from 'sweetalert2';
+const serverURL = process.env.REACT_APP_SERVER_URL;
 const AllAppliedBooks=()=>{
     const [booksInfo,setBooksInfo]=useState([]);
     const [loading,setLoading]=useState(false);
@@ -16,7 +17,7 @@ const AllAppliedBooks=()=>{
                 setLoading(true);
                 const getBooks=async()=>{
                     try {
-                        const response=await fetch("http://localhost:5000/booksList");
+                        const response=await fetch(`${serverURL}/booksList`);
                         const BooksData=await response.json();
                         const appliedBooks=BooksData.filter((eachItem)=>eachItem.status==="applied"||eachItem.status==="application-pending");
                         const filteredAppliedBooks=appliedBooks.filter((eachItem)=>eachItem.bookId.includes(searchText));

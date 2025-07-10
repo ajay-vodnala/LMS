@@ -3,6 +3,7 @@ import Preloader from '../../loader';
 import { useState ,useEffect} from 'react';
 import ResultsNotFound from '../../resultsNotFound';
 import Swal from 'sweetalert2';
+const serverURL = process.env.REACT_APP_SERVER_URL;
 const ApproveAdmins=()=>{
   const [usersInfo,setUsersInfo]=useState([]);
   const [searchText,setSearchText]=useState("");
@@ -16,7 +17,7 @@ const ApproveAdmins=()=>{
                 setLoading(true);
                 const getUsers=async()=>{
                     try {
-                        const response=await fetch('http://localhost:5000/userList');
+                        const response=await fetch(`${serverURL}/userList`);
                         const userList=await response.json();
                         const adminList=userList.filter((eachItem)=>eachItem.role==='admin'&&eachItem.status==='blocked');
                         const filteredAdminList=adminList.filter((eachItem)=>eachItem.email.includes(searchText));

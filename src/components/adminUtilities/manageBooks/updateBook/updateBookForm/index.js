@@ -3,11 +3,12 @@ import {useNavigate,useParams} from 'react-router-dom';
 import { useState ,useEffect} from 'react';
 import Swal from 'sweetalert2';
 import Preloader from '../../../../loader';
+const serverURL = process.env.REACT_APP_SERVER_URL;
 const UpdateBookForm=()=>{
     useEffect(()=>{
        const getUpdateBookData=async()=>{
         try {
-                const response=await fetch(`http://localhost:5000/bookDetails/${bookId}`)
+                const response=await fetch(`${serverURL}/bookDetails/${bookId}`)
                 const bookInfo= await response.json();
                 setBookDetails({
                     title:bookInfo.title,
@@ -60,7 +61,7 @@ const UpdateBookForm=()=>{
             data.append('publisher', bookDetails.publisher);
             data.append('imageUrl', bookDetails.imageUrl);
         try {
-                const response=await fetch(`http://localhost:5000/updateBook/${bookId}`,{
+                const response=await fetch(`${serverURL}/updateBook/${bookId}`,{
                                             method:"PUT",
                                             body:data
                                          })

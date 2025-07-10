@@ -4,6 +4,7 @@ import { useState ,useEffect} from 'react';
 import Preloader from '../../../loader';
 import Swal from 'sweetalert2';
 import ResultsNotFound from '../../../resultsNotFound';
+const serverURL = process.env.REACT_APP_SERVER_URL;
 const UpdateBook=()=>{
   const [booksInfo,setBooksInfo]=useState([]);
   const [searchText,setSearchText]=useState("");
@@ -16,7 +17,7 @@ const UpdateBook=()=>{
             setLoading(true);
             const getBooks=async()=>{
                 try {
-                    const response=await fetch("http://localhost:5000/booksList");
+                    const response=await fetch(`${serverURL}/booksList`);
                     const BooksData=await response.json();
                     const filteredUpdateBooks=BooksData.filter((eachItem)=>eachItem.bookId.includes(searchText)||eachItem.title.includes(searchText));
                     setBooksInfo(filteredUpdateBooks);

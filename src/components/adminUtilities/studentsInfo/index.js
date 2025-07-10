@@ -4,6 +4,7 @@ import '../index.css';
 import { useState ,useEffect} from 'react';
 import Swal from 'sweetalert2';
 import ResultsNotFound from '../../resultsNotFound';
+const serverURL = process.env.REACT_APP_SERVER_URL;
 const StudentInfo=()=>{
   const [usersInfo,setUsersInfo]=useState([]);
   const [searchText,setSearchText]=useState("");
@@ -18,7 +19,7 @@ const StudentInfo=()=>{
                 setLoading(true);
                 const getUsers=async()=>{
                     try {
-                        const response=await fetch('http://localhost:5000/userList');
+                        const response=await fetch(`${serverURL}/userList`);
                         const userList=await response.json();
                         const studentList=userList.filter((eachItem)=>eachItem.role==="student");
                         const filteredStudentList=studentList.filter((eachItem)=>eachItem.email.includes(searchText));

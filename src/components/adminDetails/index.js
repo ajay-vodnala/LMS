@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import Preloader from '../loader';
 import Cookies from 'js-cookie';
 import Swal from 'sweetalert2';
+const serverURL = process.env.REACT_APP_SERVER_URL;
 const AdminDetails=()=>{
     const [adminDetails,setAdminDetails]=useState({
         email:'',
@@ -36,7 +37,7 @@ const AdminDetails=()=>{
                 body:JSON.stringify({email:adminDetails.email,
                     statusText:updateStatusText})
             }
-            const response=await fetch("http://localhost:5000/updateUserStatus",options);
+            const response=await fetch(`${serverURL}/updateUserStatus`,options);
             if(response.ok){
                 Swal.fire({
                         title: 'success!',
@@ -66,7 +67,7 @@ const AdminDetails=()=>{
         ()=>{
             const getdata=async()=>{ 
             setLoading(true);
-            const response=await fetch(`http://localhost:5000/studentDetails/${email}`);
+            const response=await fetch(`${serverURL}/studentDetails/${email}`);
             const adminInfo=await response.json();
             setAdminDetails(adminInfo);
             }
@@ -86,7 +87,7 @@ const AdminDetails=()=>{
                     <h4>Admin Information</h4>
                 </div>
                 <div className='col-md-4 col-12 imgDiv'>
-                   <img className='bookimage' src={`http://localhost:5000/uploads/persons/${adminDetails.photo}`} alt='Not Available'/>
+                   <img className='bookimage' src={`${serverURL}/uploads/persons/${adminDetails.photo}`} alt='Not Available'/>
                 </div>
                 <div className='col-12 col-md-8'>
                     <div className='container'>
