@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router';
+import { HashRouter as Router, Routes, Route } from 'react-router';
 import { useState,useEffect } from 'react';
 import Swal from 'sweetalert2';
 import Home from './components/home/index';
