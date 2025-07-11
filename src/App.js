@@ -37,7 +37,7 @@ export const App =()=>{
      
       return(
         loading?<Preloader/>:
-          <Router basename="/LMS">
+          <Router basename="/">
               <Routes>
                 <Route exact path="/dashboard" element={<Interface/>} />
                 <Route path="/login" element={<Login />} />
