@@ -60,6 +60,7 @@ const [bookDetails,setBookDetails]=useState({
             data.append('imageUrl',imagePath);
             data.append('bookId', bookDetails.bookId);
         console.log(imagePath);
+        console.log("image uploaded");
         try {
                     const response=await fetch(`${serverURL}/addBook`,{
                                 method:"POST",
