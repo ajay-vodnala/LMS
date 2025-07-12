@@ -84,6 +84,7 @@ const StudentDetails=()=>{
             setLoading(false);
         },[count]
     )
+        const imageSource=(studentDetails.photo.includes('cloudinary'))?photo:`${serverURL}/uploads/persons/${studentDetails.photo}`;
     return(
         loading?<Preloader/>:(
         <div className='container-fluid content'>
@@ -92,7 +93,7 @@ const StudentDetails=()=>{
                     <h4>Student Information</h4>
                 </div>
                 <div className='col-md-4 col-12 imgDiv'>
-                   <img className='bookimage' src={`${serverURL}/uploads/persons/${studentDetails.photo}`} alt='Not Available'/>
+                   <img className='bookimage' src={imageSource} alt='Not Available'/>
                 </div>
                 <div className='col-12 col-md-8'>
                     <div className='container'>
