@@ -7,6 +7,7 @@ import {v4 as uuidv4} from 'uuid';
 const serverURL = process.env.REACT_APP_SERVER_URL;
 const AddBook=()=>{
     const navigate=useNavigate();
+    let imagePath;
 const [bookDetails,setBookDetails]=useState({
              bookId:uuidv4(),
              title:'',
@@ -23,6 +24,28 @@ const [bookDetails,setBookDetails]=useState({
 });
     const addBookToDataBase= async (e)=>{
         e.preventDefault();
+        
+              const uploadImage = async () => {
+                if (!imageUrl) return;
+            
+                const data = new FormData();
+                data.append("file", imageUrl);
+                data.append("upload_preset", "lms_image_upload"); // 🔁 Your upload preset
+                data.append("cloud_name", "dphkbv1mt"); // 🔁 Your Cloud name
+            
+                try {
+                  const res = await fetch("https://api.cloudinary.com/v1_1/dphkbv1mt/image/upload", {
+                    method: "POST",
+                    body: data
+                  });
+            
+                  const json = await res.json();
+                  imagePath=json.secure_url;
+                } catch (err) {
+                  console.error("Upload Error", err);
+                }
+              };
+        uploadImage();
          const data = new FormData();
             data.append('title', bookDetails.title);
             data.append('author', bookDetails.author);
@@ -34,8 +57,9 @@ const [bookDetails,setBookDetails]=useState({
             data.append('publisher', bookDetails.publisher);
             data.append('status', bookDetails.status);
             data.append('appliedBy', bookDetails.appliedBy);
-            data.append('imageUrl', bookDetails.imageUrl);
+            data.append('imageUrl',imagePath);
             data.append('bookId', bookDetails.bookId);
+        console.log(imagePath);
         try {
                     const response=await fetch(`${serverURL}/addBook`,{
                                 method:"POST",
