@@ -33,6 +33,7 @@ const BookDetails=()=>{
            setLoading(false);
         },[]
     )
+    const imageSource=(bookDetails.imageUrl.includes('cloudinary'))?imageUrl:`${serverURL}/uploads/books/${bookDetails.imageUrl}`;
     return(
         loading?<Preloader/>:(
         <div className='container-fluid content'>
@@ -41,7 +42,7 @@ const BookDetails=()=>{
                     <h4>Book Information</h4>
                 </div>
                 <div className='col-md-4 col-12  imgDiv'>
-                   <img className='bookimage' src={`${serverURL}/uploads/books/${bookDetails.imageUrl}`} alt='Not Available'/>
+                   <img className='bookimage' src={imageSource} alt='Not Available'/>
                 </div>
                 <div className='col-12 col-md-8'>
                     <div className='container'>
