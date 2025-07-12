@@ -11,7 +11,7 @@ const DisplayBooks=(props)=>{
     }
     return(
         <tr className='dataRow'>
-            <td className='imageDiv'><img src={imageSourc} className='bookImg' alt='Book Image'></img></td>
+            <td className='imageDiv'><img src={imageSource} className='bookImg' alt='Book Image'></img></td>
             <td>{title}</td>
             <td>{author}</td>
             <td>{department}</td>
