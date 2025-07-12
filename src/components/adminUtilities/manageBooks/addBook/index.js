@@ -30,8 +30,8 @@ const [bookDetails,setBookDetails]=useState({
             
                 const data = new FormData();
                 data.append("file", imageUrl);
-                data.append("upload_preset", "lms_image_upload"); // 🔁 Your upload preset
-                data.append("cloud_name", "dphkbv1mt"); // 🔁 Your Cloud name
+                data.append("upload_preset", "lms_image_upload"); 
+                data.append("cloud_name", "dphkbv1mt"); 
             
                 try {
                   const res = await fetch("https://api.cloudinary.com/v1_1/dphkbv1mt/image/upload", {
