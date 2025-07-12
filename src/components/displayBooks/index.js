@@ -4,7 +4,7 @@ const serverURL = process.env.REACT_APP_SERVER_URL;
 const DisplayBooks=(props)=>{
     const {bookDetails}=props;
     const{bookId,imageUrl,title,author,department,yearOfPublish,language,location,status}=bookDetails;
-    const imageSource=(imageUrl.includes('cloudinary'))?"imageUrl":`${serverURL}/uploads/books/${imageUrl}`;
+    const imageSource=(imageUrl.includes('cloudinary'))?imageUrl:`${serverURL}/uploads/books/${imageUrl}`;
     let statusColor=null;
     if(status==="available"){
         statusColor="greenText";
