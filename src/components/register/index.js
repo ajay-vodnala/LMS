@@ -8,6 +8,7 @@ const serverURL = process.env.REACT_APP_SERVER_URL;
 
 const Register=()=>{
   const navigate=useNavigate();
+  let imagePath;
   const [loading,setLoading]=useState(false);
   const [inputType,setInputType]=useState("password");
   const [icon,setIcon]=useState(<i class="fa-regular fa-eye-slash"></i>);
@@ -52,6 +53,27 @@ const Register=()=>{
       form.status="blocked";
     }
     const ParsedEmail=form.email.toLowerCase();
+    const uploadImage = async () => {
+                if (!photo) return;
+            
+                const data = new FormData();
+                data.append("file", photo);
+                data.append("upload_preset", "lms_image_upload"); 
+                data.append("cloud_name", "dphkbv1mt"); 
+            
+                try {
+                  const res = await fetch("https://api.cloudinary.com/v1_1/dphkbv1mt/image/upload", {
+                    method: "POST",
+                    body: data
+                  });
+            
+                  const json = await res.json();
+                  imagePath=json.secure_url;
+                } catch (err) {
+                  console.error("Upload Error", err);
+                }
+              };
+        uploadImage();
     const userData = new FormData();
                 userData.append('role', form.role);
                 userData.append('email', ParsedEmail);
@@ -63,7 +85,7 @@ const Register=()=>{
                 userData.append('age', form.age);
                 userData.append('status', form.status);
                 userData.append('address', form.address);
-                userData.append('photo', form.photo);
+                userData.append('photo', imagePath);
             try {
                         const response=await fetch(`${serverURL}/register`,{
                                     method:"POST",
