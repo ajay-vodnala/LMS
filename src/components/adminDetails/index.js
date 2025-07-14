@@ -77,7 +77,7 @@ const AdminDetails=()=>{
                 console.log(error)
             }
             setLoading(false);
-        },[adminDetails]
+        },[]
     )
     const imageSource=(adminDetails.photo.includes('cloudinary'))?adminDetails.photo:`${serverURL}/uploads/books/${adminDetails.photo}`;
     return(
