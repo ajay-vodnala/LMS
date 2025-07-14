@@ -4,67 +4,69 @@ import {useNavigate} from 'react-router-dom';
 import 'react-native-get-random-values';
 import Swal from 'sweetalert2';
 import {v4 as uuidv4} from 'uuid';
+import Preloader from '../../../loader';
+import Cookies from 'js-cookie';
 const serverURL = process.env.REACT_APP_SERVER_URL;
+const jwtToken=Cookies.get("jwtToken");
 const AddBook=()=>{
     const navigate=useNavigate();
-    let imagePath;
+    const [loading,setLoading]=useState(false);
 const [bookDetails,setBookDetails]=useState({
-             bookId:uuidv4(),
+             bookid:uuidv4(),
              title:'',
              author:'',
              description:'',
              location:'',
-             yearOfPublish:'',
+             yearofpublish:'',
              department:'',
              language:'',
              publisher:'',
-             imageUrl:'',
+             imageurl:'',
              status:'available',
-             appliedBy:''
+             appliedby:''
 });
+console.log(jwtToken);
+
     const addBookToDataBase= async (e)=>{
         e.preventDefault();
+        setLoading(true);
         
-              const uploadImage = async () => {
-                if (!imageUrl) return;
+                if (!bookDetails.imageurl) return;
             
-                const data = new FormData();
-                data.append("file", imageUrl);
-                data.append("upload_preset", "lms_image_upload"); 
-                data.append("cloud_name", "dphkbv1mt"); 
+                const ImageData = new FormData();
+                ImageData.append("file", bookDetails.imageurl);
+                ImageData.append("upload_preset", "lms_image_upload"); 
+                ImageData.append("cloud_name", "dphkbv1mt"); 
             
                 try {
                   const res = await fetch("https://api.cloudinary.com/v1_1/dphkbv1mt/image/upload", {
                     method: "POST",
-                    body: data
+                    body: ImageData
                   });
-            
                   const json = await res.json();
-                  imagePath=json.secure_url;
-                } catch (err) {
-                  console.error("Upload Error", err);
-                }
-              };
-        uploadImage();
-         const data = new FormData();
-            data.append('title', bookDetails.title);
-            data.append('author', bookDetails.author);
-            data.append('description', bookDetails.description);
-            data.append('location', bookDetails.location);
-            data.append('yearOfPublish', bookDetails.yearOfPublish);
-            data.append('department', bookDetails.department);
-            data.append('language', bookDetails.language);
-            data.append('publisher', bookDetails.publisher);
-            data.append('status', bookDetails.status);
-            data.append('appliedBy', bookDetails.appliedBy);
-            data.append('imageUrl',imagePath);
-            data.append('bookId', bookDetails.bookId);
-        console.log(imagePath);
-        console.log("image uploaded");
-        try {
-                    const response=await fetch(`${serverURL}/addBook`,{
+                  const data={
+                        title: bookDetails.title,
+                        author: bookDetails.author,
+                        description: bookDetails.description,
+                        location: bookDetails.location,
+                        yearofpublish: bookDetails.yearofpublish,
+                        department: bookDetails.department,
+                        language: bookDetails.language,
+                        publisher: bookDetails.publisher,
+                        status: bookDetails.status,
+                        appliedby: bookDetails.appliedby,
+                        imageurl:json.secure_url,
+                        bookid: bookDetails.bookid
+                  }
+
+                    const response=await fetch(`${serverURL}/addbook`,{
                                 method:"POST",
-                                body:data
+                                headers: {
+                                        "Content-Type": "application/json",
+                                        accept:"application/json",
+                                        authentication:`Bearer ${jwtToken}`
+                                    },
+                                body:JSON.stringify(data)
                     });
                     if(response.ok){
                         Swal.fire({
@@ -77,25 +79,24 @@ const [bookDetails,setBookDetails]=useState({
                     else{
                         Swal.fire({
                                 title: 'error!',
-                                text: 'Internal Server Error',
+                                text: ' Error',
                                 icon: 'error',
                                 confirmButtonText: 'OK'
                                 }) 
                     }
-                    
-        } 
-        catch (error) {
-                    Swal.fire({
+                } catch (err) {
+                   Swal.fire({
                             title: 'error!',
-                            text: error,
+                            text: "internal server error",
                             icon: 'error',
                             confirmButtonText: 'OK'
-                            })     
-                      }
+                            })   
+                }
         navigate("/addBook")
+        setLoading(false);
     }
     const handleChange=(e)=>{
-        if(e.target.name==='imageUrl'){
+        if(e.target.name==='imageurl'){
               setBookDetails({...bookDetails,[e.target.name]:e.target.files[0]});
            }
         else{
@@ -103,6 +104,7 @@ const [bookDetails,setBookDetails]=useState({
         }
     }
     return(
+        loading?<Preloader/>:
         <div className='container-fluid'>
             <form onSubmit={addBookToDataBase} className='addBookForm'>
                 <div className='container'>
@@ -188,9 +190,9 @@ const [bookDetails,setBookDetails]=useState({
                             <div className='col-7 col-lg-8'>
                                 <input
                                     type="number"
-                                    name="yearOfPublish"
+                                    name="yearofpublish"
                                     placeholder="Enter published Year"
-                                    value={bookDetails.yearOfPublish}
+                                    value={bookDetails.yearofpublish}
                                     onChange={handleChange}
                                     required
                                     className='input-field'
@@ -259,7 +261,7 @@ const [bookDetails,setBookDetails]=useState({
                             <div className='col-7 col-lg-8'>
                                 <input
                                     type="file"
-                                    name="imageUrl"
+                                    name="imageurl"
                                     onChange={handleChange}
                                     required
                                     accept="image/*"

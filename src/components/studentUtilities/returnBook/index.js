@@ -28,7 +28,7 @@ const ReturnBook=()=>{
                                                   authentication:`Bearer ${jwtToken}`
                                               },
                                               body:JSON.stringify({status:"return-pending",
-                                                appliedBy:""
+                                                appliedby:""
                                               })
                                             })
       
@@ -75,7 +75,7 @@ const ReturnBook=()=>{
                   }
                   const response=await fetch(`${serverURL}/studentUtilities/appliedBooks`,options);
                   const appliedBooksData=await response.json();
-                  const searchFilterBooks=appliedBooksData.filter((eachItem)=>eachItem.bookId.includes(searchText)||eachItem.title.includes(searchText));
+                  const searchFilterBooks=appliedBooksData.filter((eachItem)=>eachItem.bookid.includes(searchText)||eachItem.title.includes(searchText));
                   setBooksList(searchFilterBooks)
                   if(response.ok){
                   }else{
@@ -101,7 +101,7 @@ const ReturnBook=()=>{
                 </div>
                 <div className="row">
                     <div className="col-12">
-                        {(appliedFilteredBooks[0]===undefined)?<ResultsNotFound/>:appliedFilteredBooks.map((eachItem)=><ReturnBookComp returnBook={returnBook} bookInfo={eachItem} key={eachItem.bookId}/>)}
+                        {(appliedFilteredBooks[0]===undefined)?<ResultsNotFound/>:appliedFilteredBooks.map((eachItem)=><ReturnBookComp returnBook={returnBook} bookInfo={eachItem} key={eachItem.bookid}/>)}
                     </div>
                 </div>
             </div>

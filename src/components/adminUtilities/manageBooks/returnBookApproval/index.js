@@ -29,7 +29,7 @@ const ReturnBooks=()=>{
                                           },
                                           body:JSON.stringify({
                                             status:'available',
-                                            appliedBy:""
+                                            appliedby:""
                                           })
                                         })
   
@@ -90,7 +90,7 @@ const ReturnBooks=()=>{
                     <label><i className="fa-solid fa-magnifying-glass"></i>&nbsp;<b>search:</b></label>
                     <input type='search' onChange={searchChange} name='search' value={searchText} placeholder='Search By Email ID'></input>
                 </div>
-                 {loading?(<Preloader/>):((booksInfo[0]===undefined)?<ResultsNotFound/>:booksInfo.map((eachBook)=><ReturnComp bookDetails={eachBook} approveReturnBook={approveReturnBook} key={eachBook.bookId}/>))}
+                 {loading?(<Preloader/>):((booksInfo[0]===undefined)?<ResultsNotFound/>:booksInfo.map((eachBook)=><ReturnComp bookDetails={eachBook} approveReturnBook={approveReturnBook} key={eachBook.bookid}/>))}
             </div>
         )
     }

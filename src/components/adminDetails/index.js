@@ -14,7 +14,7 @@ const AdminDetails=()=>{
         gender:'',
         address:'',
         qualification:'',
-        photo:null,
+        photo:"",
         age:null
     });
     const jwtToken=Cookies.get("jwtToken");
@@ -79,6 +79,7 @@ const AdminDetails=()=>{
             setLoading(false);
         },[adminDetails]
     )
+    const imageSource=(adminDetails.photo.includes('cloudinary'))?adminDetails.photo:`${serverURL}/uploads/books/${adminDetails.photo}`;
     return(
         loading?<Preloader/>:(
         <div className='container-fluid content'>
@@ -87,7 +88,7 @@ const AdminDetails=()=>{
                     <h4>Admin Information</h4>
                 </div>
                 <div className='col-md-4 col-12 imgDiv'>
-                   <img className='bookimage' src={`${serverURL}/uploads/persons/${adminDetails.photo}`} alt='Not Available'/>
+                   <img className='bookimage' src={imageSource} alt='Not Available'/>
                 </div>
                 <div className='col-12 col-md-8'>
                     <div className='container'>

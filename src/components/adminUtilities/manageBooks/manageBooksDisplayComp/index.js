@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import '../index.css';
 const ManageBooksDisplay=(props)=>{
     const {manageFun,displayText,bookDetails,btnColor}=props;
-    const {bookId,title,language,status}=bookDetails;
+    const {bookid,title,language,status}=bookDetails;
     const fun_manage=()=>{
-        manageFun(bookId);
+        manageFun(bookid);
     }
     const statusColor=(status==="available")?"statusColorGreen":"statusColorRed";
     let button=null;
@@ -12,7 +12,7 @@ const ManageBooksDisplay=(props)=>{
         button=<button className={`btn btn-${btnColor}`} onClick={fun_manage}>{displayText}</button>
     }
     else{
-        button=<Link to={`/updateBook/${bookId}`}><button className={`btn btn-${btnColor}`}>{displayText}</button></Link>
+        button=<Link to={`/updateBook/${bookid}`}><button className={`btn btn-${btnColor}`}>{displayText}</button></Link>
     }
     return(
         <div className='container-fluid mt-4 bookItem'>
@@ -21,7 +21,7 @@ const ManageBooksDisplay=(props)=>{
                     <div className='container-fluid'>
                         <div className='row header-display'>
                             <div className='col-md-3 appliedBookElement'>
-                                <p><span className='d-md-none updateHeading me-3'>Book ID :</span><Link className='appliedBookLink' to={`../bookDetails/${bookId}`}>{bookId}</Link></p>
+                                <p><span className='d-md-none updateHeading me-3'>Book ID :</span><Link className='appliedBookLink' to={`../bookDetails/${bookid}`}>{bookid}</Link></p>
                             </div>
                              <div className='col-md-3 appliedBookElement'>
                                 <p><span className='d-md-none updateHeading me-3'>Book Title :</span>{title}</p>

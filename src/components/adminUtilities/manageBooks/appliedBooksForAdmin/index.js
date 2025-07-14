@@ -20,7 +20,7 @@ const AllAppliedBooks=()=>{
                         const response=await fetch(`${serverURL}/booksList`);
                         const BooksData=await response.json();
                         const appliedBooks=BooksData.filter((eachItem)=>eachItem.status==="applied"||eachItem.status==="application-pending");
-                        const filteredAppliedBooks=appliedBooks.filter((eachItem)=>eachItem.bookId.includes(searchText));
+                        const filteredAppliedBooks=appliedBooks.filter((eachItem)=>eachItem.bookid.includes(searchText));
                         setBooksInfo(filteredAppliedBooks);
                         console.log(booksInfo)
                     } catch (error) {
@@ -50,7 +50,7 @@ const AllAppliedBooks=()=>{
                 <div className='col-md-2 d-none d-md-block adminAppliedbookHeading'>Status </div>
                 <div className='col-md-3 d-none d-md-block adminAppliedbookHeading'>Applied By</div>            
             </div>
-            {(booksInfo[0]===undefined)?<ResultsNotFound/>:booksInfo.map((eachItem)=><AllAppliedComp bookDetails={eachItem} key={eachItem.bookId}/>)}
+            {(booksInfo[0]===undefined)?<ResultsNotFound/>:booksInfo.map((eachItem)=><AllAppliedComp bookDetails={eachItem} key={eachItem.bookid}/>)}
         </div>
     )
 }

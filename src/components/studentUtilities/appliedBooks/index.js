@@ -16,10 +16,10 @@ const AppliedBooks=()=>{
       setSearchText(e.target.value);
     }
     const appliedBooksList=booksInfo.filter((eachItem)=>eachItem.status==="applied"||eachItem.status==="application-pending");
-    const removeBook= async (bookId,statusValue,appliedByValue,alertText)=>{
+    const removeBook= async (bookid,statusValue,appliedbyValue,alertText)=>{
       setLoading(true);
        try {
-              const response=await fetch(`${serverURL}/updateBookStatus/${bookId}`,{
+              const response=await fetch(`${serverURL}/updateBookStatus/${bookid}`,{
                                           method:"PUT",
                                           headers:{
                                               "Content-Type":"application/json",
@@ -28,7 +28,7 @@ const AppliedBooks=()=>{
                                           },
                                           body:JSON.stringify({
                                             status:statusValue,
-                                            appliedBy:appliedByValue
+                                            appliedby:appliedbyValue
                                           })
                                         })
   
@@ -74,7 +74,7 @@ const AppliedBooks=()=>{
           }
           const response=await fetch(`${serverURL}/studentUtilities/appliedBooks`,options);
           const BooksData=await response.json();
-          const filteredAppliedBooks=BooksData.filter((eachItem)=>eachItem.bookId.includes(searchText)||eachItem.title.includes(searchText));
+          const filteredAppliedBooks=BooksData.filter((eachItem)=>eachItem.bookid.includes(searchText)||eachItem.title.includes(searchText));
           if(response.ok){
             setbooksInfo(filteredAppliedBooks);
           }else{
@@ -98,7 +98,7 @@ const AppliedBooks=()=>{
                                 <label><i className="fa-solid fa-magnifying-glass"></i>&nbsp;<b>search:</b></label>
                                 <input type='search' onChange={searchChange} name='search' value={searchText} placeholder='Search By Book Id/book Title'></input>
                         </div>
-                 {(appliedBooksList[0]===undefined)?<ResultsNotFound/>:(appliedBooksList.map((eachBook)=><AppliedBookComp bookDetails={eachBook} removeBook={removeBook} key={eachBook.bookId}/>))}
+                 {(appliedBooksList[0]===undefined)?<ResultsNotFound/>:(appliedBooksList.map((eachBook)=><AppliedBookComp bookDetails={eachBook} removeBook={removeBook} key={eachBook.bookid}/>))}
             </div>
         )
     }

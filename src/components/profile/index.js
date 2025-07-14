@@ -9,7 +9,7 @@ const serverURL = process.env.REACT_APP_SERVER_URL;
 const Profile=(props)=>{
     const jwtToken=Cookies.get("jwtToken");
     const [loading,setLoading]=useState(false);
-    const [userDetails,setUserDetails]=useState("");
+    const [userDetails,setUserDetails]=useState({photo:""});
     useEffect(
         ()=>{
             setLoading(true);
@@ -50,6 +50,7 @@ const Profile=(props)=>{
         },[]
     )
     const statusColor=(userDetails.status==="active")?"statusColorGreen":"statusColorRed";
+    const imageSource=(userDetails.photo.includes('cloudinary'))?userDetails.photo:`${serverURL}/uploads/persons/${userDetails.photo}`;
     return(
         loading?<Preloader/>:(
         <div className='container-fluid content'>
@@ -58,7 +59,7 @@ const Profile=(props)=>{
                     <h4 className="ms-4">Profile</h4>
                 </div>
                 <div className='col-md-4 col-12 mb-4 mb-md-0 imgDiv'>
-                   <img className='bookimage profileImg' src={`${serverURL}/uploads/persons/${userDetails.photo}`} alt='Not Available'/>
+                   <img className='bookimage profileImg' src={imageSource} alt='Not Available'/>
                 </div>
                 <div className='col-12 col-md-8'>
                     <div className='container'>

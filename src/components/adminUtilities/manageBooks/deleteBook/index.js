@@ -53,7 +53,7 @@ const DeleteBook=()=>{
                                 const response=await fetch(`${serverURL}/booksList`);
                                 const BooksData=await response.json();
                                 const availableBooks=BooksData.filter((eachItem)=>eachItem.status==="available");
-                                const filteredDeleteBooks=availableBooks.filter((eachItem)=>eachItem.bookId.includes(searchText)||eachItem.title.includes(searchText));
+                                const filteredDeleteBooks=availableBooks.filter((eachItem)=>eachItem.bookid.includes(searchText)||eachItem.title.includes(searchText));
                                 setBooksInfo(filteredDeleteBooks);
                             } catch (error) {
                                     Swal.fire({
@@ -95,7 +95,7 @@ const DeleteBook=()=>{
                                 <input type='search' onChange={searchChange} name='search' value={searchText} placeholder='Search By Book Id'></input>
                         </div>
                        { (booksInfo[0]===undefined)?<ResultsNotFound/>:(
-                        (booksInfo.map((eachItem)=> <ManageBooksDisplay displayText="Delete" bookDetails={eachItem} manageFun={manageFun} btnColor="danger" key={eachItem.bookId}/>)))}
+                        (booksInfo.map((eachItem)=> <ManageBooksDisplay displayText="Delete" bookDetails={eachItem} manageFun={manageFun} btnColor="danger" key={eachItem.bookid}/>)))}
                     </div>
                 </div>
             </div>

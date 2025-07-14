@@ -1,18 +1,21 @@
 import '../../../manageBooks/index.css';
+const serverURL = process.env.REACT_APP_SERVER_URL;
+
 const ApprovalComp=(props)=>{
     const {bookDetails,approveBook,rejectBook}=props;
-    const{bookId,imageUrl,title,author,status,language,appliedBy}=bookDetails;
+    const{bookid,imageurl,title,author,status,language,appliedby}=bookDetails;
     const approveBookFun=()=>{
-        approveBook(bookId,appliedBy);
+        approveBook(bookid,appliedby);
     }
     const rejectBookFun=()=>{
-        rejectBook(bookId,appliedBy);
+        rejectBook(bookid,appliedby);
     }
+    const imageSource=(imageurl.includes('cloudinary'))?imageurl:`${serverURL}/uploads/books/${imageurl}`;
     return(
         <div className="singleBookDiv container">
             <div className="row">
                 <div className="col-3 appliedImageDiv">
-                    <img src={imageUrl} className="appliedBookImg" alt="book image"></img>
+                    <img src={imageSource} className="appliedBookImg" alt="book image"></img>
                 </div>
                 <div className="col-6 appliedContentDiv">
                     <p><span className="appliedBookContent">Title&nbsp;:</span>{title}</p>

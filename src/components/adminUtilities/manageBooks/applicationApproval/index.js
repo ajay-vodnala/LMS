@@ -17,10 +17,10 @@ const ApproveBooks=()=>{
   const searchChange=(e)=>{
     setSearchText(e.target.value);
   }
-  const approveBook= async (bookId,appliedBy)=>{
+  const approveBook= async (bookid,appliedby)=>{
     setLoading(true);
      try {
-            const response=await fetch(`${serverURL}/updateBookStatus/${bookId}`,{
+            const response=await fetch(`${serverURL}/updateBookStatus/${bookid}`,{
                                         method:"PUT",
                                         headers:{
                                             "Content-Type":"application/json",
@@ -29,7 +29,7 @@ const ApproveBooks=()=>{
                                         },
                                         body:JSON.stringify({
                                           status:"applied",
-                                          appliedBy:appliedBy
+                                          appliedby:appliedby
                                         })
                                       })
 
@@ -62,10 +62,10 @@ const ApproveBooks=()=>{
             navigate('/approvalBooks');
             setCount(count+1);
   }
-  const rejectBook= async (bookId,appliedBy)=>{
+  const rejectBook= async (bookid,appliedby)=>{
     setLoading(true);
      try {
-            const response=await fetch(`${serverURL}/updateBookStatus/${bookId}`,{
+            const response=await fetch(`${serverURL}/updateBookStatus/${bookid}`,{
                                         method:"PUT",
                                         headers:{
                                             "Content-Type":"application/json",
@@ -74,7 +74,7 @@ const ApproveBooks=()=>{
                                         },
                                         body:JSON.stringify({
                                           status:"available",
-                                          appliedBy:""
+                                          appliedby:""
                                         })
                                       })
 
@@ -134,7 +134,7 @@ const ApproveBooks=()=>{
                     <label><i className="fa-solid fa-magnifying-glass"></i>&nbsp;<b>search:</b></label>
                     <input type='search' onChange={searchChange} name='search' value={searchText} placeholder='Search By Email ID'></input>
                 </div>
-                 {loading?(<Preloader/>):((booksInfo[0]===undefined)?<ResultsNotFound/>:booksInfo.map((eachBook)=><ApprovalComp approveBook={approveBook} rejectBook={rejectBook} bookDetails={eachBook} key={eachBook.bookId}/>))}
+                 {loading?(<Preloader/>):((booksInfo[0]===undefined)?<ResultsNotFound/>:booksInfo.map((eachBook)=><ApprovalComp approveBook={approveBook} rejectBook={rejectBook} bookDetails={eachBook} key={eachBook.bookid}/>))}
             </div>
         )
       }

@@ -5,24 +5,26 @@ import Preloader from '../loader';
 const serverURL = process.env.REACT_APP_SERVER_URL;
 const BookDetails=()=>{
     const [bookDetails,setBookDetails]=useState({
-        title:null,
-        author:null,
-        description:null,
-        location:null,
-        yearOfPublish:null,
-        department:null,
-        language:null,
-        publisher:null,
-        imageUrl:null
+        title:" ",
+        author:" ",
+        description:" ",
+        location:" ",
+        yearofpublish:" ",
+        department:" ",
+        language:" ",
+        publisher:" ",
+        imageurl:""
     });
     const [loading,setLoading]=useState(false);
-    const {bookId}=useParams();
+    const {bookid}=useParams();
     useEffect(
         ()=>{
             const getdata=async()=>{
             setLoading(true);
-            const response=await fetch(`${serverURL}/bookDetails/${bookId}`);
+            const response=await fetch(`${serverURL}/bookDetails/${bookid}`);
+            console.log(response);
             const bookInfo=await response.json();
+            console.log(bookInfo);
             setBookDetails(bookInfo);
         }
             try {
@@ -33,7 +35,7 @@ const BookDetails=()=>{
            setLoading(false);
         },[]
     )
-    const imageSource=(bookDetails.imageUrl.includes('cloudinary'))?imageUrl:`${serverURL}/uploads/books/${bookDetails.imageUrl}`;
+    const imageSource=(bookDetails.imageurl.includes('cloudinary'))?bookDetails.imageurl:`${serverURL}/uploads/books/${bookDetails.imageurl}`;
     return(
         loading?<Preloader/>:(
         <div className='container-fluid content'>
@@ -51,7 +53,7 @@ const BookDetails=()=>{
                                 <p className='contentHeading'>Book ID:</p>
                             </div>
                              <div className='col-md-10 col-7'>
-                                <p>{bookId}</p>
+                                <p>{bookid}</p>
                             </div>
                             <div className='col-md-2 col-4'>
                                 <p className='contentHeading'>Title :</p>
@@ -82,7 +84,7 @@ const BookDetails=()=>{
                                 <p className='contentHeading'>Year Of Publish :</p>
                             </div>
                              <div className='col-md-10 col-7'>
-                                <p>{bookDetails.yearOfPublish}</p>
+                                <p>{bookDetails.yearofpublish}</p>
                             </div><div className='col-md-2 col-4'>
                                 <p className='contentHeading'>Department :</p>
                             </div>

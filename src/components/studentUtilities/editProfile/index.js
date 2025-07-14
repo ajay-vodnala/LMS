@@ -9,6 +9,7 @@ const serverURL = process.env.REACT_APP_SERVER_URL;
 const EditProfile=()=>{
   const jwtToken=Cookies.get("jwtToken");
   const navigate=useNavigate();
+  const [updated,setUpdated]=useState(false);
   const [loading,setLoading]=useState(false);
   const [UserInfo,setUserInfo]=useState({
     name: '',
@@ -24,6 +25,7 @@ const EditProfile=()=>{
   const handleChange = (e) => {
     if (e.target.name === 'photo') {
       setUserInfo({ ...UserInfo, [e.target.name]: e.target.files[0] });
+      setUpdated(true);
     } else {
       setUserInfo({ ...UserInfo, [e.target.name]: e.target.value });
     }
@@ -67,21 +69,46 @@ const EditProfile=()=>{
   },[])
 
   const handleSubmit = async (e) => {
-    setLoading(true)
     e.preventDefault();
-    const userData = new FormData();
-                userData.append('name', UserInfo.name);
-                userData.append('email', UserInfo.email);
-                userData.append('mobile', UserInfo.mobile);
-                userData.append('qualification', UserInfo.qualification);
-                userData.append('gender', UserInfo.gender);
-                userData.append('age', UserInfo.age);
-                userData.append('address', UserInfo.address);
-                userData.append('photo', UserInfo.photo);
-            try {
+    setLoading(true)
+
+      const ImageData = new FormData();
+              ImageData.append("file", UserInfo.photo);
+              ImageData.append("upload_preset", "lms_image_upload"); 
+              ImageData.append("cloud_name", "dphkbv1mt"); 
+
+      const userData ={
+                    name: UserInfo.name,
+                    email: UserInfo.email,
+                    mobile: UserInfo.mobile,
+                    qualification: UserInfo.qualification,
+                    gender: UserInfo.gender,
+                    age: UserInfo.age,
+                    address: UserInfo.address
+                    }
+
+                try {
+                      if(updated){
+                          const res = await fetch("https://api.cloudinary.com/v1_1/dphkbv1mt/image/upload", {
+                          method: "POST",
+                          body: ImageData
+                            });
+                          const json = await res.json();
+                          userData.photo = json.secure_url;
+                      }
+                      else{
+                          userData.photo= UserInfo.photo;
+                      }
                         const response=await fetch(`${serverURL}/updateUserDetails`,{
-                                    method:"PUT",
-                                    body:userData
+                        method:"PUT",
+                        headers:{
+                                  "Content-Type": "application/json",
+                                  accept:"application/json"
+                              },
+                        body:JSON.stringify({
+                          ...userData,
+                          photo: userData.photo
+                        })
                         });
                         if(response.ok){
                             Swal.fire({
@@ -98,16 +125,14 @@ const EditProfile=()=>{
                                     confirmButtonText: 'OK'
                                     }) 
                         }
-                        
-            } 
-            catch (error) {
-                        Swal.fire({
-                                title: 'error!',
-                                text: error,
-                                icon: 'error',
-                                confirmButtonText: 'OK'
-                                })     
-                          }
+                        } catch (err) {
+                            Swal.fire({
+                                    title: 'error!',
+                                    text: "internal server error",
+                                    icon: 'error',
+                                    confirmButtonText: 'OK'
+                                    })   
+                        }
             setLoading(false)
             navigate("/editProfile")
   };
@@ -242,7 +267,6 @@ const EditProfile=()=>{
                                   name="photo"
                                   accept="image/*"
                                   onChange={handleChange}
-                                  required
                                   className='input-field'
                                 /> 
                             </div>

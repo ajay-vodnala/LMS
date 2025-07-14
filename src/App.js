@@ -54,7 +54,7 @@ export const App =()=>{
                       <Route path="/deleteBook" element={<DeleteBook/>} />
                       <Route exact path="/approvalBooks" element={<ApproveBooks/>} />
                       <Route exact path="/adminUtilities/appliedBooks" element={<AllAppliedBooks/>} />
-                      <Route exact path="/updateBook/:bookId" element={<UpdateBookForm />} />
+                      <Route exact path="/updateBook/:bookid" element={<UpdateBookForm />} />
                       <Route path="/deleteUser" element={<DeleteUser/>} />
                       <Route exact path="/studentsInfo" element={<StudentsInfo />} />
                       <Route exact path="/adminsInfo" element={<AdminInfo />} />
@@ -66,7 +66,7 @@ export const App =()=>{
                   </Route> 
                   <Route exact path="/profile" element={<Profile />} />
                   <Route exact path="/contact" element={<Contact />} />
-                  <Route exact path="/bookDetails/:bookId" element={<BookDetails />} /> 
+                  <Route exact path="/bookDetails/:bookid" element={<BookDetails />} /> 
                   <Route exact path="/studentDetails/:email" element={<StudentDetails />} /> 
                   <Route path="/editProfile" element={<EditProfile/>} />
                   <Route path="*" element={<NotFound />} />

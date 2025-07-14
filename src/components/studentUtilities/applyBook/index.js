@@ -19,10 +19,10 @@ const ApplyBook=()=>{
         setSearchText(e.target.value);
     }
 
-    const applyBook= async (bookId)=>{
+    const applyBook= async (bookid)=>{
           setLoading(true);
            try {
-                  const response=await fetch(`${serverURL}/updateBookStatus/${bookId}`,{
+                  const response=await fetch(`${serverURL}/updateBookStatus/${bookid}`,{
                                               method:"PUT",
                                               headers:{
                                                   "Content-Type":"application/json",
@@ -30,7 +30,7 @@ const ApplyBook=()=>{
                                                   authentication:`Bearer ${jwtToken}`
                                               },
                                               body:JSON.stringify({status:"application-pending",
-                                                appliedBy:"email"
+                                                appliedby:"email"
                                               })
                                             })
       
@@ -70,7 +70,7 @@ const ApplyBook=()=>{
                     try {
                         const response=await fetch(`${serverURL}/booksList`);
                         const BooksData=await response.json();
-                        const searchFilterBooks=BooksData.filter((eachItem)=>eachItem.bookId.includes(searchText)||eachItem.title.includes(searchText));
+                        const searchFilterBooks=BooksData.filter((eachItem)=>eachItem.bookid.includes(searchText)||eachItem.title.includes(searchText));
                         setBooksInfo(searchFilterBooks);
                     } catch (error) {
                             Swal.fire({
@@ -98,7 +98,7 @@ const ApplyBook=()=>{
                 
                 <div className="row">
                     <div className="col-12">
-                        {(availableBooks[0]===undefined)?<ResultsNotFound/>:availableBooks.map((eachItem)=><ApplyBookComp applyBook={applyBook} bookInfo={eachItem} key={eachItem.bookId}/>)}
+                        {(availableBooks[0]===undefined)?<ResultsNotFound/>:availableBooks.map((eachItem)=><ApplyBookComp applyBook={applyBook} bookInfo={eachItem} key={eachItem.bookid}/>)}
                     </div>
                 </div>
             </div>

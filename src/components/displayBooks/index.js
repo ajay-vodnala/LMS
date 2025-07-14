@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 const serverURL = process.env.REACT_APP_SERVER_URL;
 const DisplayBooks=(props)=>{
     const {bookDetails}=props;
-    const{bookId,imageUrl,title,author,department,yearOfPublish,language,location,status}=bookDetails;
-    const imageSource=(imageUrl.includes('cloudinary'))?imageUrl:`${serverURL}/uploads/books/${imageUrl}`;
+    const{bookid,imageurl,title,author,department,yearofpublish,language,location,status}=bookDetails;
+    const imageSource=(imageurl.includes('cloudinary'))?imageurl:`${serverURL}/uploads/books/${imageurl}`;
     let statusColor=null;
     if(status==="available"){
         statusColor="greenText";
@@ -15,11 +15,11 @@ const DisplayBooks=(props)=>{
             <td>{title}</td>
             <td>{author}</td>
             <td>{department}</td>
-            <td>{yearOfPublish}</td>
+            <td>{yearofpublish}</td>
             <td>{language}</td>
             <td>{location}</td>
             <td className={`statusText ${statusColor}`}>{status}</td>
-            <td><Link className='bookLink' to={`/bookDetails/${bookId}`}><button>View</button></Link></td>         
+            <td><Link className='bookLink' to={`/bookDetails/${bookid}`}><button>View</button></Link></td>         
         </tr>
        
     )

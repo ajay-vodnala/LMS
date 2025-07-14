@@ -19,7 +19,7 @@ const UpdateBook=()=>{
                 try {
                     const response=await fetch(`${serverURL}/booksList`);
                     const BooksData=await response.json();
-                    const filteredUpdateBooks=BooksData.filter((eachItem)=>eachItem.bookId.includes(searchText)||eachItem.title.includes(searchText));
+                    const filteredUpdateBooks=BooksData.filter((eachItem)=>eachItem.bookid.includes(searchText)||eachItem.title.includes(searchText));
                     setBooksInfo(filteredUpdateBooks);
                 } catch (error) {
                         Swal.fire({
@@ -62,7 +62,7 @@ const UpdateBook=()=>{
                                 <label><i className="fa-solid fa-magnifying-glass"></i>&nbsp;<b>search:</b></label>
                                 <input type='search' onChange={searchChange} name='search' value={searchText} placeholder='Search By Book Id'></input>
                         </div>
-                        {(booksInfo[0]===undefined)?<ResultsNotFound/>:booksInfo.map((eachItem)=> <ManageBooksDisplay displayText="Update" bookDetails={eachItem} btnColor="warning" key={eachItem.bookId}/>)}
+                        {(booksInfo[0]===undefined)?<ResultsNotFound/>:booksInfo.map((eachItem)=> <ManageBooksDisplay displayText="Update" bookDetails={eachItem} btnColor="warning" key={eachItem.bookid}/>)}
                     </div>
                 </div>
             </div>

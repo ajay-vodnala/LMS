@@ -18,7 +18,7 @@ const BooksTable=(props)=>{
                 </tr>
             </thead>
             <tbody>
-                {booksList.map((eachItem)=><DisplayBooks bookDetails={eachItem} key={eachItem.bookId}/>)}
+                {booksList.map((eachItem)=><DisplayBooks bookDetails={eachItem} key={eachItem.bookid}/>)}
             </tbody>
         </table>
     )

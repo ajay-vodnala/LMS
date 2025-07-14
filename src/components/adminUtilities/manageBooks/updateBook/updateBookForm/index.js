@@ -5,27 +5,44 @@ import Swal from 'sweetalert2';
 import Preloader from '../../../../loader';
 const serverURL = process.env.REACT_APP_SERVER_URL;
 const UpdateBookForm=()=>{
-    useEffect(()=>{
+   
+    const {bookid}=useParams();
+    const [loading,setLoading]=useState(true);
+    const [updated,setUpdated]=useState(false);
+    const navigate=useNavigate();
+    const [bookDetails,setBookDetails]=useState({
+            title:'NA',
+            author:'NA',
+            description:'NA',
+            location:'NA',
+            yearofpublish:'NA',
+            department:'NA',
+            language:'NA',
+            publisher:'NA',
+            imageurl:" "
+        });
+         useEffect(()=>{
        const getUpdateBookData=async()=>{
+        console.log(bookid);
         try {
-                const response=await fetch(`${serverURL}/bookDetails/${bookId}`)
+                const response=await fetch(`${serverURL}/bookDetails/${bookid}`)
                 const bookInfo= await response.json();
                 setBookDetails({
                     title:bookInfo.title,
                     author:bookInfo.author,
                     description:bookInfo.description,
                     location:bookInfo.location,
-                    yearOfPublish:bookInfo.yearOfPublish,
+                    yearofpublish:bookInfo.yearofpublish,
                     department:bookInfo.department,
                     language:bookInfo.language,
                     publisher:bookInfo.publisher,
-                    imageUrl:bookInfo.imageUrl
+                    imageurl:bookInfo.imageurl
                 })
             }
         catch (error) {
                         Swal.fire({
                                 title: 'error!',
-                                text: error,
+                                text: "internal server error",
                                 icon: 'error',
                                 confirmButtonText: 'OK'
                                 })                      }
@@ -33,69 +50,79 @@ const UpdateBookForm=()=>{
     }
     getUpdateBookData();
 },[])
-    const {bookId}=useParams();
-    const [loading,setLoading]=useState(true);
-    const navigate=useNavigate();
-    const [bookDetails,setBookDetails]=useState({
-            title:'NA',
-            author:'NA',
-            description:'NA',
-            location:'NA',
-            yearOfPublish:'NA',
-            department:'NA',
-            language:'NA',
-            publisher:'NA',
-            imageUrl:null
-        });
     const updateBookToDataBase= async (e)=>{
         e.preventDefault();
-        setLoading(true)
-        const data = new FormData();
-            data.append('title', bookDetails.title);
-            data.append('author', bookDetails.author);
-            data.append('description', bookDetails.description);
-            data.append('location', bookDetails.location);
-            data.append('yearOfPublish', bookDetails.yearOfPublish);
-            data.append('department', bookDetails.department);
-            data.append('language', bookDetails.language);
-            data.append('publisher', bookDetails.publisher);
-            data.append('imageUrl', bookDetails.imageUrl);
-        try {
-                const response=await fetch(`${serverURL}/updateBook/${bookId}`,{
-                                            method:"PUT",
-                                            body:data
-                                         })
+        setLoading(true)       
+                        const ImageData = new FormData();
+                            ImageData.append("file", bookDetails.imageurl);
+                            ImageData.append("upload_preset", "lms_image_upload"); 
+                            ImageData.append("cloud_name", "dphkbv1mt"); 
 
-                if (response.ok){
-                    Swal.fire({
-                            title: 'Success!',
-                            text: 'Book Updated Successfully',
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                            })
-                }
-                else{
-                    Swal.fire({
-                            title: 'error!',
-                            text: 'something went worng, try again',
-                            icon: 'error',
-                            confirmButtonText: 'OK'
-                            })
-                }
-        } 
-        catch (error) {
-                Swal.fire({
-                        title: 'error!',
-                        text: 'internal Server error',
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                        })
-        }
-        navigate('/updateBooksList');
+                        const data = {
+                            title: bookDetails.title,
+                            author: bookDetails.author,
+                            description: bookDetails.description,
+                            location: bookDetails.location,
+                            yearofpublish: bookDetails.yearofpublish,
+                            department: bookDetails.department,
+                            language: bookDetails.language,
+                            publisher: bookDetails.publisher
+                            }                    
+                    
+                        try {
+                            if(updated){
+                                const res = await fetch("https://api.cloudinary.com/v1_1/dphkbv1mt/image/upload", {
+                                method: "POST",
+                                body: ImageData
+                                  });
+                                const json = await res.json();
+                                bookDetails.imageurl=json.secure_url;
+                            }
+                            else{
+                                bookDetails.imageurl=bookDetails.imageurl;
+                            }
+                            const response=await fetch(`${serverURL}/updateBook/${bookid}`,{
+                                        method:"PUT",
+                                        headers:{
+                                            "Content-Type": "application/json",
+                                            accept:"application/json"
+                                        },
+                                        body:JSON.stringify({
+                                                    ...data,
+                                                    imageurl: bookDetails.imageurl // Include image URL here
+                                                })
+                            });
+                            if(response.ok){
+                                Swal.fire({
+                                        title: 'Success!',
+                                        text: 'Book Updated Successfully',
+                                        icon: 'success',
+                                        confirmButtonText: 'OK'
+                                        })
+                                navigate('/updateBooksList');
+                            }
+                            else{
+                                Swal.fire({
+                                        title: 'error!',
+                                        text: 'Internal Server Error',
+                                        icon: 'error',
+                                        confirmButtonText: 'OK'
+                                        }) 
+                            }
+                        } catch (err) {
+                           Swal.fire({
+                                    title: 'error!',
+                                    text: "internal server error",
+                                    icon: 'error',
+                                    confirmButtonText: 'OK'
+                                    })   
+                        }
+                        setLoading(false);
     }
     const handleChange=(e)=>{
-        if(e.target.name==='imageUrl'){
+        if(e.target.name==='imageurl'){
               setBookDetails({...bookDetails,[e.target.name]:e.target.files[0]});
+              setUpdated(true);
            }
         else{
               setBookDetails({...bookDetails,[e.target.name]:e.target.value});
@@ -183,9 +210,9 @@ const UpdateBookForm=()=>{
                             <div className='col-7 col-lg-8'>
                                 <input
                                     type="number"
-                                    name="yearOfPublish"
+                                    name="yearofpublish"
                                     placeholder="Enter published Year"
-                                    value={bookDetails.yearOfPublish}
+                                    value={bookDetails.yearofpublish}
                                     onChange={handleChange}
                                     className='input-field'
                                 />
@@ -251,7 +278,7 @@ const UpdateBookForm=()=>{
                             <div className='col-7 col-lg-8'>
                                 <input
                                     type="file"
-                                    name="imageUrl"
+                                    name="imageurl"
                                     onChange={handleChange}
                                     accept="image/*"
                                     className='input-field'

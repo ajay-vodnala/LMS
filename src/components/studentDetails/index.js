@@ -13,7 +13,7 @@ const StudentDetails=()=>{
         gender:'',
         address:'',
         qualification:'',
-        photo:null,
+        photo:'',
         age:null
     });
     const jwtToken =Cookies.get("jwtToken");
@@ -35,7 +35,7 @@ const StudentDetails=()=>{
                     headers:{
                         "Content-type":"application/json",
                         Accept:"application/json",
-                        Authentication:jwtToken
+                        Authentication:`Bearer ${jwtToken}`
                     },
                     body:JSON.stringify({email:studentDetails.email,
                         statusText:updateStatusText})
@@ -84,7 +84,7 @@ const StudentDetails=()=>{
             setLoading(false);
         },[count]
     )
-        const imageSource=(studentDetails.photo.includes('cloudinary'))?photo:`${serverURL}/uploads/persons/${studentDetails.photo}`;
+    const imageSource=(studentDetails.photo.includes('cloudinary'))?studentDetails.photo:`${serverURL}/uploads/persons/${studentDetails.photo}`;
     return(
         loading?<Preloader/>:(
         <div className='container-fluid content'>
