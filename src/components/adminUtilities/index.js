@@ -4,10 +4,6 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Cookies from 'js-cookie';
 let expand=null;
  const AdminUtilities=()=>{
-  const logout=()=>{
-    Cookies.remove("jwtToken");
-    Cookies.remove("role");
-  }
     return(
         <NavDropdown
                     title="Admin Panel"
@@ -24,8 +20,6 @@ let expand=null;
                     <Link to="/returnApproval" className='option nav-link-opt option2'>Return&nbsp;Approvals</Link>
                     <Link to="/deleteUser" className='option nav-link-opt option2'>Delete&nbsp;User</Link>
                     <Link to="/editProfile" className='option nav-link-opt option2'>Edit&nbsp;Profile</Link>
-                    <Link className='option nav-link-opt option2' onClick={logout}>Log&nbsp;out</Link>
-
                   </NavDropdown>
     )
 }

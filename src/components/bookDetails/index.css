@@ -21,6 +21,13 @@
     color: purple;
     font-weight: 600;
 }
+.contentDisplay{
+    height:30vh;
+    overflow-y: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .blue-btn{
     color:rgb(70, 70, 247);
     border:2px solid rgb(70, 70, 247);
@@ -29,6 +36,16 @@
     font-weight: 700;
     padding:0.2rem;
     border-radius: 6%;
+}
+.rate-btn{
+     color:gold;
+    border:2px solid gold;
+    background: transparent;
+    font-style: italic;
+    font-weight: 700;
+    padding:0.2rem;
+    border-radius: 6%;
+    text-shadow: 0.2px 0.2px black;
 }
 .statusColorGreen{
     color: green;
@@ -51,5 +68,9 @@
 }
 .blue-btn:hover{
     background: rgb(70, 70, 247);
+    color: white;
+}
+.rate-btn:hover{
+    background: gold;
     color: white;
 }

@@ -1,7 +1,6 @@
 import './App.css';
 import { HashRouter as Router, Routes, Route } from 'react-router';
 import { useState,useEffect } from 'react';
-import Swal from 'sweetalert2';
 import Home from './components/home/index';
 import Profile from './components/profile/index';
 import BookDetails from './components/bookDetails/index';
@@ -20,6 +19,7 @@ import UpdateBook from './components/adminUtilities/manageBooks/updateBook';
 import ManageBooks from './components/adminUtilities/manageBooks/index';
 import AdminInfo from './components/adminUtilities/adminInfo';
 import AdminDetails from './components/adminDetails';
+import BookRating from './components/ratings';
 import StudentsInfo from './components/adminUtilities/studentsInfo/index';
 import AppliedBooks from './components/studentUtilities/appliedBooks/index';
 import ReturnBooks from './components/adminUtilities/manageBooks/returnBookApproval';
@@ -65,6 +65,7 @@ export const App =()=>{
                       <Route path="/updateBooksList" element={<UpdateBook/>} />
                   </Route> 
                   <Route exact path="/profile" element={<Profile />} />
+                  <Route exact path="/ratings/:bookid" element={<BookRating />} />
                   <Route exact path="/contact" element={<Contact />} />
                   <Route exact path="/bookDetails/:bookid" element={<BookDetails />} /> 
                   <Route exact path="/studentDetails/:email" element={<StudentDetails />} /> 

@@ -93,7 +93,7 @@ const Register=()=>{
                                     text: responseData.text,
                                     icon: 'success',
                                     })
-                                    navigate('/login');
+                                    navigate("/login");
                                   }
                         else{
                             Swal.fire({

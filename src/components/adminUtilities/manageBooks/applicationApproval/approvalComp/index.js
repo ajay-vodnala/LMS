@@ -18,10 +18,11 @@ const ApprovalComp=(props)=>{
                     <img src={imageSource} className="appliedBookImg" alt="book image"></img>
                 </div>
                 <div className="col-6 appliedContentDiv">
-                    <p><span className="appliedBookContent">Title&nbsp;:</span>{title}</p>
-                    <p><span className="appliedBookContent">Author&nbsp;:</span>{author}</p>
-                    <p><span className="appliedBookContent">Language&nbsp;:</span>{language}</p>
-                    <p><span className="appliedBookContent">Status&nbsp;:</span>{status}</p>
+                    <p><span className="appliedBookContent">Title&nbsp;:&nbsp;</span><span className='contentValues'>{title}</span></p>
+                    <p><span className="appliedBookContent">Author&nbsp;:&nbsp;</span><span className='contentValues'>{author}</span></p>
+                    <p><span className="appliedBookContent">Language&nbsp;:&nbsp;</span><span className='contentValues'>{language}</span></p>
+                    <p><span className="appliedBookContent">Status&nbsp;:&nbsp;</span><span className='contentValues'>{status}</span></p>
+                    <p><span className="appliedBookContent">Applied By&nbsp;:&nbsp;</span><span className='contentValues'>{appliedby}</span></p>
                 </div>
                 <div className="appliedButtonDiv col-12 col-md-3 d-md-flex flex-row flex-md-column">
                     <button className="btn btn-success" onClick={approveBookFun}><b>Approve</b></button>

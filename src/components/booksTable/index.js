@@ -10,7 +10,7 @@ const BooksTable=(props)=>{
                     <th>Title</th>
                     <th>Author</th>
                     <th>Department</th>
-                    <th>Published</th>
+                    <th>Rating</th>
                     <th>Language</th>
                     <th>Location</th>
                     <th>Status</th>

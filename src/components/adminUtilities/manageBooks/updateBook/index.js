@@ -60,7 +60,7 @@ const UpdateBook=()=>{
                         </div>
                          <div className='searchFieldManageBooks mt-2 d-flex'>
                                 <label><i className="fa-solid fa-magnifying-glass"></i>&nbsp;<b>search:</b></label>
-                                <input type='search' onChange={searchChange} name='search' value={searchText} placeholder='Search By Book Id'></input>
+                                <input type='search' onChange={searchChange} name='search' value={searchText} placeholder='Search By Book Id/Book title'></input>
                         </div>
                         {(booksInfo[0]===undefined)?<ResultsNotFound/>:booksInfo.map((eachItem)=> <ManageBooksDisplay displayText="Update" bookDetails={eachItem} btnColor="warning" key={eachItem.bookid}/>)}
                     </div>

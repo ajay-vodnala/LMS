@@ -132,7 +132,7 @@ const ApproveBooks=()=>{
               <h4>Application Approvals</h4>
               <div className='d-flex justify-content-end me-1 me-md-5'>
                     <label><i className="fa-solid fa-magnifying-glass"></i>&nbsp;<b>search:</b></label>
-                    <input type='search' onChange={searchChange} name='search' value={searchText} placeholder='Search By Email ID'></input>
+                    <input type='search' onChange={searchChange} name='search' value={searchText} placeholder='Search By Book title'></input>
                 </div>
                  {loading?(<Preloader/>):((booksInfo[0]===undefined)?<ResultsNotFound/>:booksInfo.map((eachBook)=><ApprovalComp approveBook={approveBook} rejectBook={rejectBook} bookDetails={eachBook} key={eachBook.bookid}/>))}
             </div>

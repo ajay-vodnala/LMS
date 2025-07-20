@@ -25,6 +25,10 @@ import Cookies from 'js-cookie';
 }**/
 
 const Header=()=> {
+   const logout=()=>{
+      Cookies.remove("jwtToken");
+      Cookies.remove("role");
+    }
   const UserRole=Cookies.get("role");
   const displayProperty=(UserRole==="admin")?<AdminUtilities/>:<StudentUtilities/>
 
@@ -52,6 +56,7 @@ const Header=()=> {
                     {displayProperty}
                     <Link to="/profile" className='option profile option2'>Profile</Link>
                     <Link to="/contact" className='option profile option2'>Contact&nbsp;Us</Link>
+                    <Link className='option profile option2' onClick={logout}>Log&nbsp;out</Link>
                 </div>
                 </Nav>
               </Offcanvas.Body>

@@ -1,0 +1,46 @@
+.fa-star{
+    color: gold;
+}
+.ratedProfile{
+    background-color: rgb(5, 79, 5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-weight: 600;
+    color: white;
+    font-size: x-large;
+    width: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: normal;
+    height: 2rem;
+}
+p{
+    margin: 0%;
+    font-weight: 600;
+}
+.profileLetter{
+    margin-bottom: 1rem;
+}
+.ratingSectionImage{
+    text-align: center;
+    width: 50%;
+}
+.ratingImageDiv{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+.displayRatings{
+    overflow-y: scroll;
+    max-height: 70vh;
+}
+.ratingsHeading{
+    color: purple;
+    border-left: 5px solid purple;
+    padding-left: 0.5rem;
+    font-weight: 700;
+}
+.ratingSideHeading{
+    color: purple;
+}

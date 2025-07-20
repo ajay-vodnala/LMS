@@ -12,6 +12,9 @@
     justify-content: center;
     align-items: center;
 }
+.contentValues{
+    font-weight: 700;
+}
 .deleteUserBtn{
    background: transparent;
    color: red;
